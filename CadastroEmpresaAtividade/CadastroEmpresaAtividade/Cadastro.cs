@@ -1,7 +1,8 @@
 ﻿using System;
 class cadastro
 {
-    public string Cnpj {get;set;}
+
+    public string Cnpj { get; set; }
     public string RazaoSocial { get; set; }
     public string NomeFantasia { get; set; }
     public string SituacaoCadastral { get; set; }
@@ -16,8 +17,12 @@ class cadastro
     public string Nome { get; set; }
     public string Cpf { get; set; }
 
+    public cadastro()
+    {
+
+    }
     public cadastro(string cnpj, string razaoSocial, string nomeFantasia, string situacaoCentral, string telefone, string dataInicioAtividade,
-        string capitalSocial, string estado, string naturezaJuridica, string cidade, string bairro, string rua, string nome, string cpf) 
+        string capitalSocial, string estado, string naturezaJuridica, string cidade, string bairro, string rua, string nome, string cpf)
     {
         this.Cnpj = cnpj;
         this.RazaoSocial = razaoSocial;

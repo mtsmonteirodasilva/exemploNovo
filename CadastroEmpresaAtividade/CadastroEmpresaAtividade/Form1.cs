@@ -24,64 +24,153 @@ namespace CadastroEmpresaAtividade
 
         private void bt_cadastrar_Click(object sender, EventArgs e)
         {
-            string regime;
-            string tipo;
-            string porte;
-
-            string cnpj = tx_cnpj.Text;
-            string razaoSocial = tx_razaoSocial.Text;
-            string nomeFantasia = tx_nomeFantasia.Text;
-            string situacaoCadastral = cb_situacaoCadastral.Text;
-            string telefone = ms_telefone.Text;
-            string dataInicioAtividade = ms_dataInicioAtividade.Text;
-            string capitalSocial = tx_capitalSocial.Text;
-            string estado = cb_estado.Text;
-            string naturezaJuridica = cb_naturezaJuridica.Text;
-            string cidade = tx_cidade.Text;
-            string bairro = tx_bairro.Text;
-            string rua = tx_rua.Text;
-            string nome = tx_nome.Text;
-            string cpf = ms_cpf.Text;
-
-            if(rd_simples.Checked == true)
+            try
             {
-               regime = rd_simples.Text;
+
+                cadastro c = new cadastro();
+                string regime;
+                string tipo;
+                string porte;
+
+                c.Cnpj = tx_cnpj.Text;
+                c.RazaoSocial = tx_razaoSocial.Text;
+                c.NomeFantasia = tx_nomeFantasia.Text;
+                c.SituacaoCadastral = cb_situacaoCadastral.Text;
+                c.Telefone = ms_telefone.Text;
+                c.DataInicioAtividade = ms_dataInicioAtividade.Text;
+                c.CapitalSocial = tx_capitalSocial.Text;
+                c.Estado = cb_estado.Text;
+                c.NaturezaJuridica = cb_naturezaJuridica.Text;
+                c.Cidade = tx_cidade.Text;
+                c.Bairro = tx_bairro.Text;
+                c.Rua = tx_rua.Text;
+                c.Nome = tx_nome.Text;
+                c.Cpf = ms_cpf.Text;
+
+                if (rd_simples.Checked == true)
+                {
+                    regime = rd_simples.Text;
+                }
+                else if (rd_lucro.Checked == true)
+                {
+                    regime = rd_lucro.Text;
+                }
+                else
+                {
+                    regime = rd_lucroReal.Text;
+                }
+
+                if (rd_matriz.Checked == true)
+                {
+                    tipo = rd_matriz.Text;
+                }
+                else
+                {
+                    tipo = rd_filial.Text;
+                }
+
+                if (rd_pequeno.Checked == true)
+                {
+                    porte = rd_pequeno.Text;
+                }
+                else if (rd_medio.Checked == true)
+                {
+                    porte = rd_medio.Text;
+                }
+                else
+                {
+                    porte = rd_grande.Text;
+                }
+
+                if (Validar())
+                {
+                    MessageBox.Show("Cadastro realizado com sucesso");
+                    MessageBox.Show($"Seu cnpj é {c.Cnpj}\nSua razão social é {c.RazaoSocial}\nSeu nome fantasia é {c.NomeFantasia}\nSua situação cadastral é {regime}" +
+                        $"\nSua data de inicio é {c.DataInicioAtividade}\nSeu telefone é {c.Telefone}\nSeu capital social é {c.CapitalSocial}\nSeu endereço completo é {c.Estado}, {c.Cidade}, {c.Bairro}, {c.Rua}" +
+                        $"\nO tipo de sua empresa é {tipo}\nO porte de sua empresa é {porte}\nSua natureza juridica é {c.NaturezaJuridica}\nSeu nome é {c.Nome}\nSeu cpf é {c.Cpf}");
+                }
+                else
+                {
+                    MessageBox.Show("Erro, prencha todos campos");
+                }
+
             }
-            else if(rd_lucro.Checked == true)
+            catch (Exception ex)
             {
-                regime = rd_lucro.Text;
+                MessageBox.Show("Ocorreu um erro tente novamente");
+            }
+
+
+
+
+        }
+
+        public bool Validar()
+        {
+            bool validacao;
+
+            if (tx_cnpj.Text == "")
+            {
+                validacao = false;
+            }
+            else if (tx_razaoSocial.Text == "")
+            {
+                validacao = false;
+            }
+            else if (tx_nomeFantasia.Text == "")
+            {
+                validacao = false;
+            }
+            else if (cb_situacaoCadastral.Text == "")
+            {
+                validacao = false;
+            }
+            else if (ms_telefone.Text == "")
+            {
+                validacao = false;
+            }
+            else if (ms_dataInicioAtividade.Text == "")
+            {
+                validacao = false;
+            }
+            else if (tx_capitalSocial.Text == "")
+            {
+                validacao = false;
+            }
+            else if (cb_estado.Text == "")
+            {
+                validacao = false;
+            }
+            else if (cb_naturezaJuridica.Text == "")
+            {
+                validacao = false;
+            }
+            else if (tx_cidade.Text == "")
+            {
+                validacao = false;
+            }
+            else if (tx_bairro.Text == "")
+            {
+                validacao = false;
+            }
+            else if (tx_rua.Text == "")
+            {
+                validacao = false;
+            }
+            else if (tx_nome.Text == "")
+            {
+                validacao = false;
+            }
+            else if (ms_cpf.Text == "")
+            {
+                validacao = false;
             }
             else
             {
-                regime = rd_lucroReal.Text;
+                validacao = true;
             }
-
-            if(rd_matriz.Checked == true)
-            {
-                tipo = rd_matriz.Text;
-            }
-            else
-            {
-                tipo = rd_filial.Text;
-            }
-
-            if(rd_pequeno.Checked == true)
-            {
-                porte = rd_pequeno.Text;
-            }
-            else if(rd_medio.Checked == true)
-            {
-                porte = rd_medio.Text;
-            }
-            else
-            {
-                porte = rd_grande.Text;
-            }
-
-            MessageBox.Show("Cadastro realizado com sucesso");
-            MessageBox.Show($"Seu cnpj é {cnpj}\nSua razão social é {razaoSocial}\nSeu nome fantasia é {nomeFantasia}\nSua situação cadastral é {regime}" +
-                $"\nSua data de inicio é {dataInicioAtividade}\nSeu telefone é {telefone}\nSeu capital social é {capitalSocial}\nSeu endereço completo é {estado}, {cidade}, {bairro}, {rua}" +
-                $"\nO tipo de sua empresa é {tipo}\nO porte de sua empresa é {porte}\nSua natureza juridica é {naturezaJuridica}\nSeu nome é {nome}\nSeu cpf é {cpf}");
+            return validacao;
         }
     }
+
 }
